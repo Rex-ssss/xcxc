@@ -1,0 +1,17 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="logo"></view>
+    <view class="title">二手交易小程序</view>
+    <view class="subtitle">便捷的校园二手交易平台</view>
+  </view>
+  
+  <view class="button-group">
+    <button class="btn btn-primary" bindtap="goToLogin">登录</button>
+    <button class="btn btn-secondary" bindtap="goToRegister">注册</button>
+  </view>
+  
+  <view class="footer" style="text-align: center; margin-top: 60rpx; font-size: 24rpx; color: #999999;">
+    欢迎使用校园二手交易小程序
+  </view>
+</view>
