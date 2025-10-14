@@ -1,0 +1,50 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">用户登录</view>
+  </view>
+  
+  <!-- 错误提示 -->
+  <view wx:if="{{errorMessage}}" class="message message-error">
+    {{errorMessage}}
+  </view>
+  
+  <!-- 登录表单 -->
+  <view class="form">
+    <view class="form-item">
+      <view class="form-label">学号</view>
+      <input 
+        class="form-input" 
+        type="text" 
+        placeholder="请输入学号" 
+        value="{{studentId}}" 
+        bindinput="inputStudentId"
+      />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">密码</view>
+      <input 
+        class="form-input" 
+        type="password" 
+        placeholder="请输入密码" 
+        value="{{password}}" 
+        bindinput="inputPassword"
+      />
+    </view>
+    
+    <button 
+      class="btn btn-primary" 
+      bindtap="loginSubmit"
+      loading="{{isLoading}}"
+      disabled="{{isLoading}}"
+    >
+      登录
+    </button>
+    
+    <view style="text-align: center; margin-top: 30rpx;">
+      <text>还没有账号？</text>
+      <text class="link" bindtap="goToRegister"> 立即注册</text>
+    </view>
+  </view>
+</view>
