@@ -1,0 +1,116 @@
+/* pages/orders/orders.wxss */
+
+.container {
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: #f7f8fa;
+}
+
+/* 顶部管理栏 */
+.manage-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  background-color: #ffffff;
+  border: 1rpx solid #eee;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.03);
+}
+
+/* 通用按钮与尺寸 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-mini {
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 24rpx;
+  border-radius: 28rpx;
+  font-size: 26rpx;
+}
+
+.btn-primary {
+  background-color: #1a73e8;
+  color: #ffffff;
+  border: 1rpx solid #1a73e8;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #666666;
+  border: 1rpx solid #dddddd;
+}
+
+.btn-danger {
+  background-color: #ff6b81;
+  color: #ffffff;
+  border: 1rpx solid #ff6b81;
+}
+
+/* 管理按钮与删除全部（柔和款） */
+.manage-btn {
+  background-color: #ffffff;
+  color: #666666;
+  border: 1rpx solid #dddddd;
+}
+
+.manage-btn:active {
+  opacity: 0.9;
+}
+
+.delete-all-btn {
+  background-color: #fff5f5;
+  color: #ff6b81;
+  border: 1rpx solid #ffd1d6;
+}
+
+.delete-all-btn:active {
+  background-color: #ffe9ec;
+}
+
+/* 订单卡片与商品行 */
+.order-item {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.03);
+  margin-bottom: 20rpx;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+/* 商品删除按钮（柔和款） */
+.delete-item-btn {
+  margin-left: 20rpx;
+  background-color: #fff5f5;
+  color: #ff6b81;
+  border: 1rpx solid #ffd1d6;
+  height: 48rpx;
+  line-height: 48rpx;
+  padding: 0 18rpx;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+}
+
+.delete-item-btn:active {
+  background-color: #ffe9ec;
+}
+
+/* 底部操作区按钮统一圆角与尺寸 */
+.order-actions .btn-secondary,
+.order-actions .btn-primary {
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 24rpx;
+}
