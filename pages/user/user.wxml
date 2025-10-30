@@ -1,0 +1,92 @@
+<!-- pages/user/user.wxml -->
+<view class="container">
+  <!-- 未登录状态 -->
+  <view wx:if="{{!isLogin}}" class="user-info not-login">
+    <view class="avatar" style="width: 120rpx; height: 120rpx; background-color: #f0f0f0; border-radius: 60rpx; margin: 0 auto 20rpx;"></view>
+    <view class="login-btn" style="text-align: center;">
+      <button class="btn btn-primary" bindtap="goToLogin" style="background-color: #1a73e8; color: #ffffff; border: none;">登录/注册</button>
+    </view>
+    <view class="login-hint" style="text-align: center; font-size: 28rpx; color: #999999; margin-top: 20rpx;">登录后享受更多功能</view>
+  </view>
+
+  <!-- 登录状态 -->
+  <view wx:elif="{{isLoading}}" class="loading">
+    <view>加载中...</view>
+  </view>
+
+  <!-- 用户信息区域 -->
+  <view wx:else class="user-info" style="background-color: #1a73e8; color: #ffffff; padding: 40rpx; border-radius: 0;">
+    <view class="avatar-name" style="display: flex; align-items: center;">
+      <view class="avatar" style="width: 120rpx; height: 120rpx; background-color: rgba(255, 255, 255, 0.2); border-radius: 60rpx; margin-right: 30rpx;"></view>
+      <view class="user-details">
+        <view class="user-name" style="font-size: 36rpx; font-weight: bold; margin-bottom: 10rpx;">{{userInfo.name}}</view>
+        <view class="user-id" style="font-size: 28rpx; opacity: 0.8;">学号：{{userInfo.studentId}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单状态区域 -->
+  <view class="order-status" style="background-color: #ffffff; margin-top: 20rpx; padding: 30rpx;">
+    <view class="section-header" style="display: flex; justify-content: space-between; margin-bottom: 30rpx;">
+      <view class="section-title" style="font-size: 32rpx; font-weight: bold; color: #333333;">我的订单</view>
+      <view class="view-all" bindtap="goToOrders" style="font-size: 28rpx; color: #999999; display: flex; align-items: center;">
+        全部订单 <text style="margin-left: 10rpx;">→</text>
+      </view>
+    </view>
+    <view class="order-types" style="display: flex; justify-content: space-between;">
+      <view class="order-type" bindtap="goToOrders" data-status="1" style="flex: 1; text-align: center;">
+        <view class="order-icon" style="width: 60rpx; height: 60rpx; background-color: #e3f2fd; border-radius: 30rpx; margin: 0 auto 10rpx; display: flex; align-items: center; justify-content: center;"></view>
+        <view class="order-text" style="font-size: 28rpx; color: #666666;">待付款</view>
+        <view wx:if="{{orderStats.pendingPayment > 0}}" class="badge" style="position: absolute; top: 0; right: 10rpx; background-color: #ff6b81; color: #ffffff; border-radius: 10rpx; padding: 0 10rpx; font-size: 20rpx; min-width: 28rpx; text-align: center;">{{orderStats.pendingPayment}}</view>
+      </view>
+      <view class="order-type" bindtap="goToOrders" data-status="2" style="flex: 1; text-align: center; position: relative;">
+        <view class="order-icon" style="width: 60rpx; height: 60rpx; background-color: #e8f5e9; border-radius: 30rpx; margin: 0 auto 10rpx; display: flex; align-items: center; justify-content: center;"></view>
+        <view class="order-text" style="font-size: 28rpx; color: #666666;">待发货</view>
+        <view wx:if="{{orderStats.pendingShipment > 0}}" class="badge" style="position: absolute; top: 0; right: 10rpx; background-color: #ff6b81; color: #ffffff; border-radius: 10rpx; padding: 0 10rpx; font-size: 20rpx; min-width: 28rpx; text-align: center;">{{orderStats.pendingShipment}}</view>
+      </view>
+      <view class="order-type" bindtap="goToOrders" data-status="3" style="flex: 1; text-align: center; position: relative;">
+        <view class="order-icon" style="width: 60rpx; height: 60rpx; background-color: #fff3e0; border-radius: 30rpx; margin: 0 auto 10rpx; display: flex; align-items: center; justify-content: center;"></view>
+        <view class="order-text" style="font-size: 28rpx; color: #666666;">待收货</view>
+        <view wx:if="{{orderStats.pendingReceipt > 0}}" class="badge" style="position: absolute; top: 0; right: 10rpx; background-color: #ff6b81; color: #ffffff; border-radius: 10rpx; padding: 0 10rpx; font-size: 20rpx; min-width: 28rpx; text-align: center;">{{orderStats.pendingReceipt}}</view>
+      </view>
+      <view class="order-type" bindtap="goToOrders" data-status="4" style="flex: 1; text-align: center;">
+        <view class="order-icon" style="width: 60rpx; height: 60rpx; background-color: #f3e5f5; border-radius: 30rpx; margin: 0 auto 10rpx; display: flex; align-items: center; justify-content: center;"></view>
+        <view class="order-text" style="font-size: 28rpx; color: #666666;">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list" style="background-color: #ffffff; margin-top: 20rpx;">
+    <view class="function-item" bindtap="goToMyPublish" style="display: flex; align-items: center; padding: 30rpx; border-bottom: 1rpx solid #f0f0f0;">
+      <view class="function-icon" style="width: 56rpx; height: 56rpx; background-color: #e3f2fd; border-radius: 12rpx; margin-right: 30rpx;"></view>
+      <view class="function-text" style="font-size: 32rpx; flex: 1; color: #333333;">我的发布</view>
+      <view class="function-arrow" style="color: #cccccc;">→</view>
+    </view>
+    <view class="function-item" bindtap="goToMyFavorites" style="display: flex; align-items: center; padding: 30rpx; border-bottom: 1rpx solid #f0f0f0;">
+      <view class="function-icon" style="width: 56rpx; height: 56rpx; background-color: #fce4ec; border-radius: 12rpx; margin-right: 30rpx;"></view>
+      <view class="function-text" style="font-size: 32rpx; flex: 1; color: #333333;">我的收藏</view>
+      <view class="function-arrow" style="color: #cccccc;">→</view>
+    </view>
+    <view class="function-item" bindtap="goToAddressManagement" style="display: flex; align-items: center; padding: 30rpx; border-bottom: 1rpx solid #f0f0f0;">
+      <view class="function-icon" style="width: 56rpx; height: 56rpx; background-color: #e8f5e9; border-radius: 12rpx; margin-right: 30rpx;"></view>
+      <view class="function-text" style="font-size: 32rpx; flex: 1; color: #333333;">地址管理</view>
+      <view class="function-arrow" style="color: #cccccc;">→</view>
+    </view>
+    <view class="function-item" bindtap="goToCustomerService" style="display: flex; align-items: center; padding: 30rpx;">
+      <view class="function-icon" style="width: 56rpx; height: 56rpx; background-color: #fff3e0; border-radius: 12rpx; margin-right: 30rpx;"></view>
+      <view class="function-text" style="font-size: 32rpx; flex: 1; color: #333333;">客服中心</view>
+      <view class="function-arrow" style="color: #cccccc;">→</view>
+    </view>
+  </view>
+
+  <!-- 设置和退出登录 -->
+  <view class="settings" style="background-color: #ffffff; margin-top: 20rpx;">
+    <view class="function-item" bindtap="goToSettings" style="display: flex; align-items: center; padding: 30rpx; border-bottom: 1rpx solid #f0f0f0;">
+      <view class="function-icon" style="width: 56rpx; height: 56rpx; background-color: #f3e5f5; border-radius: 12rpx; margin-right: 30rpx;"></view>
+      <view class="function-text" style="font-size: 32rpx; flex: 1; color: #333333;">设置</view>
+      <view class="function-arrow" style="color: #cccccc;">→</view>
+    </view>
+    <button wx:if="{{isLogin}}" class="btn btn-secondary logout-btn" bindtap="logout" style="background-color: #ffffff; color: #ff6b81; border: none; margin-top: 30rpx; font-size: 32rpx;">退出登录</button>
+  </view>
+</view>
